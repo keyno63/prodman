@@ -1,2 +1,4 @@
 GET    /    controllers.HelloController.get(name: Option[String])
 GET    /plus    controllers.HelloController.plus(a: Option[Int], b: Option[Int])
+
+GET    /json controllers.JsonRestController.json
