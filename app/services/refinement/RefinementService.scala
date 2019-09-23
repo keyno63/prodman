@@ -15,7 +15,7 @@ class RefinementService {
     val ret = r.setPoint(userId, point)
     ret match {
       case Right(x) =>
-        if (r.isDedined)
+        if (r.isDefined)
           sendPush()
         Right(x)
       case Left(x) => Left(x)
