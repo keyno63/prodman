@@ -1,19 +1,19 @@
 package domains.refinement
 
-class Room(story: String, members: Seq[User]) {
+class Room(val story: String, members: Seq[User]) {
 
   def isDefined: Boolean = {
     val definedMember = members.filter(!_.isDefined)
-    definedMember.length == 0
+    definedMember.isEmpty
   }
 
   def setPoint(id: String, point: Int):Either[String, String] = {
     val n = members.filter(_.id == id)
       .map(_.setPoint(point))
-    if (n.length > 0) Right("Success") else Left("Failed")
+    if (n.nonEmpty) Right("Success") else Left("Failed")
   }
 
-  def getResponse(): Either[String, Group] = {
+  def getResponse: Either[String, Group] = {
     if (isDefined) {
       val ret = this.members
         .map(x => ResponseUser apply (x.id, x.getPoint))

@@ -11,7 +11,7 @@ class RefinementService {
     r = new Room(story, l)
   }
 
-  def setPoint(userId: String, point: Int): Either[String, Any] = {
+  def setPoint(userId: String, point: Int): Either[String, String] = {
     val ret = r.setPoint(userId, point)
     ret match {
       case Right(x) =>
@@ -22,8 +22,8 @@ class RefinementService {
     }
   }
 
-  def getState(): Either[String, Group] = {
-    r.getResponse()
+  def getState: Either[String, Group] = {
+    r.getResponse
   }
 
   // TODO: impl later.
