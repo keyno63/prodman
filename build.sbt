@@ -24,7 +24,7 @@ scalaVersion := "2.12.9"
 
 val versions = Map(
   "scalikejdbc" -> "2.5.2",
-  "circe" -> "0.10.0",
+  "circe" -> "0.12.1",
 )
 
 val jsonModule = Seq(
@@ -32,7 +32,7 @@ val jsonModule = Seq(
   "io.circe" %% "circe-generic",
   "io.circe" %% "circe-parser",
 ).map(_ % versions("circe")) :+
-  ("com.dripower" %% "play-circe" % "2611.0")
+  ("com.dripower" %% "play-circe" % "2712.0")
 
 val dbModule = Seq(
   "org.scalikejdbc"        %% "scalikejdbc",
