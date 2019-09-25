@@ -45,7 +45,7 @@ class RefinementController @Inject()(
 
   def status(): Action[AnyContent] = Action.async { implicit request =>
     Future {
-      rs.getState() match {
+      rs.getState match {
         case Right(r) => Ok(r.asJson)
         case Left(l) => BadRequest(Json.obj("reason" -> l.asJson))
       }
