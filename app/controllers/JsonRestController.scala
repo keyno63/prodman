@@ -1,9 +1,10 @@
 package controllers
 
 import domains.{HtmlResource, Resource, Response}
-import play.api.mvc._
 import javax.inject._
+import play.api.mvc._
 import play.api.libs.circe.Circe
+import io.circe.Json
 import io.circe.syntax._
 import io.circe.generic.auto._
 
@@ -30,5 +31,9 @@ class JsonRestController @Inject()(
         case Left(e) => BadRequest(HtmlResource(400, e.getMessage).asJson)
       }
     }
+  }
+
+  def create(): Action[Json] = Action(circe.json(1024)) async { implicit request =>
+    Future(Ok(request.body.asJson))
   }
 }

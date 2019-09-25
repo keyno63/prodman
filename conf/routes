@@ -3,6 +3,7 @@ GET    /plus    controllers.HelloController.plus(a: Option[Int], b: Option[Int])
 
 GET    /json controllers.JsonRestController.json
 GET    /resource controllers.JsonRestController.htmlResource(value :Option[String])
+POST    /create controllers.JsonRestController.create()
 
 POST   /refinement/start controllers.refinement.RefinementController.start(story: Option[String], userIds: Option[String])
 POST   /refinement/point controllers.refinement.RefinementController.point(userId: Option[String], point: Option[Int])
