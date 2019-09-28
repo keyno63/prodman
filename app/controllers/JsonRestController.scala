@@ -34,6 +34,13 @@ class JsonRestController @Inject()(
   }
 
   def create(): Action[Json] = Action(circe.json(1024)) async { implicit request =>
-    Future(Ok(request.body.asJson))
+    Future{
+      Ok(request.body.asJson)
+        .withHeaders(
+          CACHE_CONTROL -> "max-age=3600",
+          ETAG -> "add_etag",
+          "ORGI" -> "orig"
+        )
+    }
   }
 }
