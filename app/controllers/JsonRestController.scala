@@ -7,12 +7,15 @@ import play.api.libs.circe.Circe
 import io.circe.Json
 import io.circe.syntax._
 import io.circe.generic.auto._
+import io.circe.parser._
 
 import scala.concurrent.{ExecutionContext, Future}
 
 class JsonRestController @Inject()(
     cc: ControllerComponents
     )(implicit ec: ExecutionContext) extends AbstractController(cc) with Circe {
+
+  val logger = play.api.Logger("json_controller")
 
   def json: Action[AnyContent] = Action.async { implicit request =>
     Future(
@@ -35,7 +38,9 @@ class JsonRestController @Inject()(
 
   def create(): Action[Json] = Action(circe.json(1024)) async { implicit request =>
     Future{
-      Ok(request.body.asJson)
+      val x = request.body.asJson
+      logger.info(s"name parameter: $x")
+      Ok(x)
         .withHeaders(
           CACHE_CONTROL -> "max-age=3600",
           ETAG -> "add_etag",
