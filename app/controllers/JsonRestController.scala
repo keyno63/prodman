@@ -7,7 +7,7 @@ import play.api.libs.circe.Circe
 import io.circe.{HCursor, Json}
 import io.circe.syntax._
 import io.circe.generic.auto._
-import io.circe.parser._
+import io.circe.parser.{parse => cparse}
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -40,7 +40,7 @@ class JsonRestController @Inject()(
     val r2 = """(\d{4})-(\d{2})-(\d{2})""".r
     Future{
       logger.info(s"name parameter: ${request.body.toString()}")
-      io.circe.parser.parse(request.body.toString()) match {
+      cparse(request.body.toString()) match {
         case Right(json) =>
           val cursor: HCursor = json.hcursor
           val ret = cursor.downField("time").as[String]
