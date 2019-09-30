@@ -4,7 +4,7 @@ import domains.{HtmlResource, Resource, Response}
 import javax.inject._
 import play.api.mvc._
 import play.api.libs.circe.Circe
-import io.circe.Json
+import io.circe.{HCursor, Json}
 import io.circe.syntax._
 import io.circe.generic.auto._
 import io.circe.parser._
@@ -32,6 +32,25 @@ class JsonRestController @Inject()(
       resource match {
         case Right(str) => Ok(HtmlResource(200, str).asJson)
         case Left(e) => BadRequest(HtmlResource(400, e.getMessage).asJson)
+      }
+    }
+  }
+
+  def matching(): Action[Json] = Action(circe.json) async { implicit request =>
+    val r2 = """(\d{4})-(\d{2})-(\d{2})""".r
+    Future{
+      logger.info(s"name parameter: ${request.body.toString()}")
+      io.circe.parser.parse(request.body.toString()) match {
+        case Right(json) =>
+          val cursor: HCursor = json.hcursor
+          val ret = cursor.downField("time").as[String]
+          ret match {
+            case t @ r2(a, b, c) =>
+              Ok(Response(200, s"${json.toString}: $a, $b, $c").asJson)
+            case _ => InternalServerError(Response(500, s"failed matched pattern. ${json.toString}").asJson)
+          }
+        case _ =>
+          BadRequest(Response(400, "").asJson)
       }
     }
   }
