@@ -37,6 +37,7 @@ class JsonRestController @Inject()(
   }
 
   def matching(): Action[Json] = Action(circe.json) async { implicit request =>
+    val r1 = """(\d{4})""".r
     val r2 = """(\d{4})-(\d{2})-(\d{2})""".r
     Future{
       logger.info(s"name parameter: ${request.body.toString()}")
@@ -45,6 +46,8 @@ class JsonRestController @Inject()(
           val cursor: HCursor = json.hcursor
           val ret = cursor.downField("time").as[String]
           ret match {
+            case r1(a) =>
+              Ok(Response(200, s"year: ${a}").asJson)
             case t @ r2(a, b, c) =>
               Ok(Response(200, s"${json.toString}: $a, $b, $c").asJson)
             case _ => InternalServerError(Response(500, s"failed matched pattern. ${json.toString}").asJson)
