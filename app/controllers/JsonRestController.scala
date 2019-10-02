@@ -47,7 +47,7 @@ class JsonRestController @Inject()(
           val ret = cursor.downField("time").as[String]
           ret match {
             case r1(a) =>
-              Ok(Response(200, s"year: ${a}").asJson)
+              Ok(Response(200, s"year: $a").asJson)
             case t @ r2(a, b, c) =>
               Ok(Response(200, s"${json.toString}: $a, $b, $c").asJson)
             case _ => InternalServerError(Response(500, s"failed matched pattern. ${json.toString}").asJson)
@@ -59,7 +59,7 @@ class JsonRestController @Inject()(
   }
 
   def create(): Action[Json] = Action(circe.json(1024)) async { implicit request =>
-    Future{
+    Future {
       val x = request.body.asJson
       logger.info(s"name parameter: $x")
       Ok(x)
@@ -68,6 +68,53 @@ class JsonRestController @Inject()(
           ETAG -> "add_etag",
           "ORGI" -> "orig"
         )
+    }
+  }
+
+  def rawJson(): Action[AnyContent] = Action.async { implicit request =>
+    Future {
+      logger.info("rawJson.")
+
+
+      val res = cparse(
+        """
+          |{
+          |  "part1": {
+          |    "part2": true,
+          |    "str": "sample"
+          |  },
+          |  "str0": "sample0",
+          |  "dic1": {
+          |    "dic2": {
+          |      "dic3": {
+          |        "list0": [
+          |          {
+          |            "listDig": "data",
+          |            "listDig1": "data1",
+          |            "listDig2": "data2"
+          |          },
+          |          {
+          |            "listDig": "data0",
+          |            "listDig1": "data01",
+          |            "listDig2": "data02"
+          |          },
+          |          {
+          |            "listDig": "data1",
+          |            "listDig1": "data11",
+          |            "listDig2": "data12"
+          |          }
+          |        ]
+          |      }
+          |    }
+          |  }
+          |}
+          |""".stripMargin)
+      res match {
+        case Right(value) => Ok {
+          value
+        }
+        case _ => BadRequest("")
+      }
     }
   }
 }

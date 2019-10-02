@@ -5,6 +5,7 @@ GET    /json controllers.JsonRestController.json
 GET    /resource controllers.JsonRestController.htmlResource(value :Option[String])
 POST   /match controllers.JsonRestController.matching()
 POST   /create controllers.JsonRestController.create()
+GET    /rawJson controllers.JsonRestController.rawJson()
 
 POST   /refinement/start controllers.refinement.RefinementController.start(story: Option[String], userIds: Option[String])
 POST   /refinement/point controllers.refinement.RefinementController.point(userId: Option[String], point: Option[Int])
