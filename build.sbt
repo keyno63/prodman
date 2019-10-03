@@ -5,7 +5,7 @@ lazy val root = (project in file("."))
   .enablePlugins(PlayScala)
   .settings(
     name := "prodman",
-    libraryDependencies ++=Seq(
+    libraryDependencies ++= Seq(
       filters,
       guice,
       jdbc,
@@ -13,7 +13,12 @@ lazy val root = (project in file("."))
       "org.scalatestplus.play" %% "scalatestplus-play"           % "4.0.1" % Test,
     ) ++
       dbModule ++
-      jsonModule
+      jsonModule ++
+    Seq(
+      "org.skinny-framework" %% "skinny-http-client" % "3.0.1",
+      "log4j" % "log4j" % "1.2.17",
+      "org.slf4j" % "slf4j-log4j12" % "1.7.26" % Test
+    )
   )
 
 name := "prodman"

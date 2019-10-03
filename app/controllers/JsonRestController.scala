@@ -1,6 +1,6 @@
 package controllers
 
-import domains.{ArgmentError, HtmlResource, ParseError, Resource, Response}
+import domains.{ArgmentError, Dig, HtmlResource, ParseError, Resource, Response}
 import javax.inject._
 import play.api.mvc._
 import play.api.libs.circe.Circe
@@ -8,6 +8,7 @@ import io.circe.{HCursor, Json}
 import io.circe.syntax._
 import io.circe.generic.auto._
 import io.circe.parser.{parse => cparse}
+import libs.HttpClient
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -78,7 +79,6 @@ class JsonRestController @Inject()(
     Future {
       logger.info("rawJson.")
 
-
       val res = cparse(
         """
           |{
@@ -117,6 +117,28 @@ class JsonRestController @Inject()(
           value
         }
         case _ => BadRequest("")
+      }
+    }
+  }
+
+  def jsonParser(): Action[AnyContent] = Action.async { implicit request =>
+    Future {
+      implicit def url = "http://localhost:9000/rawJson"
+      val response = HttpClient.Get(Map[String, String]())
+      cparse(response.textBody) match {
+        case Right(value) =>
+          val cursol: HCursor = value.hcursor
+          val res = cursol
+            .downField("dic1")
+            .downField("dic2")
+            .downField("dic3")
+            .downField("list0")
+            .as[List[Dig]]
+          res match {
+            case Right(value) => Ok(value.asJson)
+            case _ => Forbidden("failed parse error")
+          }
+        case _ => Forbidden("http request failed")
       }
     }
   }
