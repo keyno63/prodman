@@ -1,6 +1,6 @@
 package controllers
 
-import domains.{HtmlResource, Resource, Response}
+import domains.{ArgmentError, HtmlResource, ParseError, Resource, Response}
 import javax.inject._
 import play.api.mvc._
 import play.api.libs.circe.Circe
@@ -27,11 +27,14 @@ class JsonRestController @Inject()(
     Future {
       val resource = value match {
         case Some(x) => Resource.getResources(x)
-        case _ => Left(new Exception("shortage resource value."))
+        case _ => Left(ArgmentError("shortage resource value."))
       }
       resource match {
         case Right(str) => Ok(HtmlResource(200, str).asJson)
-        case Left(e) => BadRequest(HtmlResource(400, e.getMessage).asJson)
+        case Left(e) => e match {
+          case e: ArgmentError=> BadRequest(HtmlResource(400, e.toString).asJson)
+          case e: ParseError => NotFound(HtmlResource(404, e.toString).asJson)
+        }
       }
     }
   }
