@@ -19,9 +19,10 @@ class HelloController @Inject()(val messagesApi: MessagesApi)
 
   def plus(a: Option[Int], b: Option[Int]): Action[AnyContent] =
     Action { implicit request: Request[AnyContent] =>
-      Ok {
-        val x = a.getOrElse(0) + b.getOrElse(0)
-        s"$x"
+      val ret = (a, b) match {
+        case (Some(x), Some(y)) => s"${x+y}"
+        case _ => "Please give arguments of a and b."
       }
+      Ok(ret)
     }
 }
