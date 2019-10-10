@@ -1,14 +1,14 @@
-package controllers
+package controllers.sample
 
-import domains.{ArgmentError, Dig, HtmlResource, ParseError, Resource, Response}
-import javax.inject._
-import play.api.mvc._
-import play.api.libs.circe.Circe
-import io.circe.{HCursor, Json}
-import io.circe.syntax._
+import domains._
 import io.circe.generic.auto._
 import io.circe.parser.{parse => cparse}
+import io.circe.syntax._
+import io.circe.{HCursor, Json}
+import javax.inject._
 import libs.HttpClient
+import play.api.libs.circe.Circe
+import play.api.mvc._
 
 import scala.concurrent.{ExecutionContext, Future}
 

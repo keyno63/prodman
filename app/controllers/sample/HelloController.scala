@@ -1,4 +1,4 @@
-package controllers
+package controllers.sample
 
 import javax.inject.{Inject, Singleton}
 import play.api.i18n.{I18nSupport, Messages, MessagesApi}
