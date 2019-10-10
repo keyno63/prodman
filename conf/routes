@@ -1,13 +1,13 @@
-GET    /    controllers.HelloController.get(name: Option[String])
-GET    /plus    controllers.HelloController.plus(a: Option[Int], b: Option[Int])
-GET    /html    controllers.HtmlTextResponder.html
+GET    /    controllers.sample.HelloController.get(name: Option[String])
+GET    /plus    controllers.sample.HelloController.plus(a: Option[Int], b: Option[Int])
+GET    /html    controllers.sample.HtmlTextResponder.html
 
-GET    /json controllers.JsonRestController.json
-GET    /resource controllers.JsonRestController.htmlResource(value :Option[String])
-POST   /match controllers.JsonRestController.matching()
-POST   /create controllers.JsonRestController.create()
-GET    /rawJson controllers.JsonRestController.rawJson()
-GET    /getJson controllers.JsonRestController.jsonParser()
+GET    /json controllers.sample.JsonRestController.json
+GET    /resource controllers.sample.JsonRestController.htmlResource(value :Option[String])
+POST   /match controllers.sample.JsonRestController.matching()
+POST   /create controllers.sample.JsonRestController.create()
+GET    /rawJson controllers.sample.JsonRestController.rawJson()
+GET    /getJson controllers.sample.JsonRestController.jsonParser()
 
 POST   /refinement/start controllers.refinement.RefinementController.start(story: Option[String], userIds: Option[String])
 POST   /refinement/point controllers.refinement.RefinementController.point(userId: Option[String], point: Option[Int])
