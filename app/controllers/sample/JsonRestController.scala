@@ -1,6 +1,7 @@
 package controllers.sample
 
 import domains._
+import domains.sample.Dig
 import io.circe.generic.auto._
 import io.circe.parser.{parse => cparse}
 import io.circe.syntax._

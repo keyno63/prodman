@@ -1,4 +1,4 @@
-package domains
+package domains.sample
 
 import io.circe._
 
