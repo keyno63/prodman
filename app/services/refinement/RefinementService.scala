@@ -13,12 +13,11 @@ class RefinementService {
 
   def setPoint(userId: String, point: Int): Either[String, String] = {
     val ret = r.setPoint(userId, point)
-    ret match {
-      case Right(x) =>
+    ret.right.map{
+      x =>
         if (r.isDefined)
           sendPush()
-        Right(x)
-      case Left(x) => Left(x)
+        x
     }
   }
 
