@@ -6,7 +6,7 @@ import javax.inject._
 import play.api.libs.circe.Circe
 import io.circe.syntax._
 import io.circe.generic.auto._
-import services.refinement.RefinementService
+import refinement.service.RefinementService
 
 import scala.concurrent.{ExecutionContext, Future}
 

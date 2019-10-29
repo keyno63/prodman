@@ -1,6 +1,6 @@
-package services.refinement
+package refinement.service
 
-import domains.refinement.{Group, Room, User}
+import refinement.domain.{Group, Room, User}
 
 class RefinementService {
 

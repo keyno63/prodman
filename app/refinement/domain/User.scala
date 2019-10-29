@@ -1,4 +1,4 @@
-package domains.refinement
+package refinement.domain
 
 case class User(id: String) {
   private var point = 0
@@ -10,7 +10,7 @@ case class User(id: String) {
     this
   }
 
-  def getPoint = this.point
+  def getPoint: Int = this.point
 
   def isDefined: Boolean = this.defined
 

@@ -1,4 +1,4 @@
-package domains.refinement
+package refinement.domain
 
 class Room(val story: String, members: Seq[User]) {
 

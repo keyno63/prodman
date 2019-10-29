@@ -1,4 +1,4 @@
-package domains.refinement
+package refinement.domain
 
 class RoomManagement {
   var rooms: Seq[Room] = Seq()
