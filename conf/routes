@@ -12,3 +12,5 @@ GET    /getJson controllers.sample.JsonRestController.jsonParser()
 POST   /refinement/start controllers.refinement.RefinementController.start(story: Option[String], userIds: Option[String])
 POST   /refinement/point controllers.refinement.RefinementController.point(userId: Option[String], point: Option[Int])
 GET    /refinement/status controllers.refinement.RefinementController.status()
+
+GET    /refinement/db controllers.refinement.DbRepositoryController.get()
