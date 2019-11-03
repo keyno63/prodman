@@ -1,10 +1,10 @@
 package refinement.domain
 
-case class User(id: String) {
+case class UserAccount(id: String) {
   private var point = 0
   private var defined = false
 
-  def setPoint(point: Int): User = {
+  def setPoint(point: Int): UserAccount = {
     this.point = point
     this.defined = true
     this

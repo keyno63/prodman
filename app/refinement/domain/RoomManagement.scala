@@ -3,7 +3,7 @@ package refinement.domain
 class RoomManagement {
   var rooms: Seq[Room] = Seq()
 
-  def start(story: String, members: Seq[User]): Either[String, String] = {
+  def start(story: String, members: Seq[UserAccount]): Either[String, String] = {
     findRoom(story) match {
       case x if x.isEmpty =>
         val r = new Room(story, members)

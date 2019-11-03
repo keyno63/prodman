@@ -1,6 +1,6 @@
 package refinement.domain
 
-class Room(val story: String, members: Seq[User]) {
+class Room(val story: String, members: Seq[UserAccount]) {
 
   def isDefined: Boolean = {
     val definedMember = members.filter(!_.isDefined)

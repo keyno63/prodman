@@ -1,13 +1,13 @@
 package refinement.service
 
-import refinement.domain.{Group, Room, User}
+import refinement.domain.{Group, Room, UserAccount}
 
 class RefinementService {
 
   var r: Room = _
 
   def start(story: String, userIds: Seq[String]): Unit = {
-    val l = userIds.map(User)
+    val l = userIds.map(UserAccount)
     r = new Room(story, l)
   }
 
