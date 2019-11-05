@@ -23,7 +23,6 @@ class Room(val story: String, members: Seq[UserAccount]) {
       Left(s"not yet set. member=[$m].")
     }
   }
-
 }
 
 case class Group(story: String, members: Seq[ResponseUser])
