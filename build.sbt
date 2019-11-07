@@ -17,7 +17,10 @@ lazy val root = (project in file("."))
     Seq(
       "org.skinny-framework" %% "skinny-http-client" % "3.0.1",
       "log4j" % "log4j" % "1.2.17",
-      "org.slf4j" % "slf4j-log4j12" % "1.7.26" % Test
+      "org.slf4j" % "slf4j-log4j12" % "1.7.26" % Test,
+
+      // https://mvnrepository.com/artifact/org.postgresql/postgresql
+      "org.postgresql" % "postgresql" % "42.2.8"
     )
   )
 
