@@ -20,7 +20,9 @@ lazy val root = (project in file("."))
       "org.slf4j" % "slf4j-log4j12" % "1.7.26" % Test,
 
       // https://mvnrepository.com/artifact/org.postgresql/postgresql
-      "org.postgresql" % "postgresql" % "42.2.8"
+      "org.postgresql" % "postgresql" % "42.2.8",
+      // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+      "mysql" % "mysql-connector-java" % "8.0.18"
     )
   )
 
