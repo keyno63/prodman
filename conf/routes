@@ -14,3 +14,5 @@ POST   /refinement/point controllers.refinement.RefinementController.point(userI
 GET    /refinement/status controllers.refinement.RefinementController.status()
 
 GET    /refinement/db controllers.refinement.DbRepositoryController.get()
+
+GET    /pgsql/post controllers.sample.DBController.get
