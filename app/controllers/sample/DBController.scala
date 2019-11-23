@@ -1,10 +1,13 @@
 package controllers.sample
 
+import java.time.OffsetDateTime
+
 import domains.sample.PostPgsqlRepository
+import form.Post
 import javax.inject.Inject
 import play.api.data.Form
 import play.api.data.Forms.{mapping, text}
-import play.api.i18n.{I18nSupport, MessagesApi}
+import play.api.i18n.{I18nSupport, Messages, MessagesApi}
 import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents}
 
 class DBController @Inject()(cc: ControllerComponents, override val messagesApi: MessagesApi)
@@ -34,7 +37,6 @@ class DBController @Inject()(cc: ControllerComponents, override val messagesApi:
     Ok(Json.toJson(Response(Meta(200), Some(Json.obj("posts" -> Json.toJson(PostPgsqlRepository.findAll))))))
   }
 
-  /*
   def post: Action[AnyContent] = Action { implicit request =>
     form.bindFromRequest.fold(
       error => {
@@ -48,6 +50,5 @@ class DBController @Inject()(cc: ControllerComponents, override val messagesApi:
       }
     )
   }
-   */
 
 }
