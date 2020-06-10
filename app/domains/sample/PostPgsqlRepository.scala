@@ -2,8 +2,6 @@ package domains.sample
 
 import form.Post
 import scalikejdbc._
-import scalikejdbc.config.{DBs, DBsWithEnv}
-import scalikejdbc.jsr310._
 
 object PostPgsqlRepository {
 

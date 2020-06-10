@@ -2,7 +2,6 @@ package refinement.repository
 
 import form.Post
 import scalikejdbc._
-import scalikejdbc.jsr310._
 
 object PostRepository {
 
